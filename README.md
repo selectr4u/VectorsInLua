@@ -35,16 +35,16 @@ print(v3)  -- Output: 4, 6
 The Vector3D class represents a 3D vector and provides various methods for vector operations.
 
 ### Methods
-`new(x, y, z)`: Creates a new Vector3D instance.
-`dot(other)`: Computes the dot product with another `Vector3D`.
-`cross(other)`: Computes the cross product with another `Vector3D`.
-`angleTo(other)`: Computes the angle to another `Vector3D`.
-`distanceTo(other)`: Computes the distance to another `Vector3D`.
-`lerp(other, t)`: Linearly interpolates between this vector and another `Vector3D`.
-`projectOnto(other)`: Projects this vector onto another `Vector3D`.
-`reflectAcross(normal)`: Reflects this vector across a given normal.
-`magnitude()`: Computes the magnitude of this vector.
-`normalize()`: Normalizes this vector.
+- `new(x, y, z)`: Creates a new Vector3D instance.
+- `dot(other)`: Computes the dot product with another `Vector3D`.
+- `cross(other)`: Computes the cross product with another `Vector3D`.
+- `angleTo(other)`: Computes the angle to another `Vector3D`.
+- `distanceTo(other)`: Computes the distance to another `Vector3D`.
+- `lerp(other, t)`: Linearly interpolates between this vector and another - `Vector3D`.
+- `projectOnto(other)`: Projects this vector onto another `Vector3D`.
+- `reflectAcross(normal)`: Reflects this vector across a given normal.
+- `magnitude()`: Computes the magnitude of this vector.
+- `normalize()`: Normalizes this vector.
 
 ### Example Usage
 
