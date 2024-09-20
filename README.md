@@ -59,4 +59,4 @@ print(v3)  -- Output: 5, 7, 9
 
 ## License
 
-The project is licensed under the MIT license
+This project is licensed under the MIT License. See the LICENSE file for more details.
