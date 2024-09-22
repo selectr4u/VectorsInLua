@@ -1,8 +1,15 @@
+---@class Vector2D
+---@field x number
+---@field y number
 local Vector2D = {}
 Vector2D.__index = Vector2D
 
 local epsilon = 1e-10
 
+-- Creates a new Vector2D object.
+---@param x number
+---@param y number
+---@return Vector2D
 function Vector2D.new(x, y)
     local self = setmetatable({}, Vector2D)
     self.x = x
@@ -10,6 +17,9 @@ function Vector2D.new(x, y)
     return self
 end
 
+-- Checks if the given parameter is a Vector2D object.
+---@param a any
+---@return boolean
 function Vector2D._checkIfVector(a)
     if type(a) == "number" or type(a) == "string" or type(a) ~= "table" then return false end
     return a.__index == Vector2D
@@ -73,6 +83,10 @@ function Vector2D.__tostring(a)
     return a.x .. ", " .. a.y
 end
 
+-- Calculates the dot product of two Vector2D objects.
+---@param v1 Vector2D
+---@param v2 Vector2D
+---@return number
 function Vector2D.dotProduct(v1, v2)
     if (Vector2D._checkIfVector(v1)) and (Vector2D._checkIfVector(v2)) then
         return (v1.x * v2.x) + (v1.y * v2.y)
@@ -81,7 +95,9 @@ function Vector2D.dotProduct(v1, v2)
     end
 end
 
--- supporting this sort of style as well where its a method of the class
+-- Calculates the dot product of the current Vector2D object and another.
+---@param v2 Vector2D
+---@return number
 function Vector2D:dot(v2)
     if (Vector2D._checkIfVector(v2)) then
         return (self.x * v2.x) + (self.y * v2.y)
@@ -90,6 +106,10 @@ function Vector2D:dot(v2)
     end
 end
 
+-- Calculates the cross product of two Vector2D objects.
+---@param v1 Vector2D
+---@param v2 Vector2D
+---@return number
 function Vector2D.crossProduct(v1, v2)
     if (Vector2D._checkIfVector(v1)) and (Vector2D._checkIfVector(v2)) then
         return (v1.x * v2.y) - (v1.y * v2.x)
@@ -98,7 +118,9 @@ function Vector2D.crossProduct(v1, v2)
     end
 end
 
--- supporting this sort of style as well where its a method of the class
+-- Calculates the cross product of the current Vector2D object and another.
+---@param v2 Vector2D
+---@return number
 function Vector2D:cross(v2)
     if (Vector2D._checkIfVector(v2)) then
         return (self.x * v2.y) - (self.y * v2.x)
@@ -107,6 +129,9 @@ function Vector2D:cross(v2)
     end
 end
 
+-- Calculates the angle between the current Vector2D object and another.
+---@param v2 Vector2D
+---@return number
 function Vector2D:angleTo(v2)
     local dotProduct = Vector2D.dotProduct(self, v2)
     local v1Magnitude = self:magnitude()
@@ -116,20 +141,33 @@ function Vector2D:angleTo(v2)
     return math.deg(math.acos(cosTheta))
 end
 
+-- Projects the current Vector2D object onto another.
+---@param v2 Vector2D
+---@return Vector2D
 function Vector2D:projectOnto(v2)
     local dotProduct = Vector2D.dotProduct(self, v2)
     local projectionScalar = (dotProduct) / v2:magnitude() ^ 2
     return v2 * projectionScalar
 end
 
+-- Calculates the distance between the current Vector2D object and another.
+---@param v2 Vector2D
+---@return number
 function Vector2D:distanceTo(v2)
     return math.sqrt((v2.x - self.x) ^ 2 + (v2.y - self.y) ^ 2)
 end
 
+-- Linearly interpolates between the current Vector2D object and another.
+---@param v2 Vector2D
+---@param t number
+---@return Vector2D
 function Vector2D:lerp(v2, t)
     return Vector2D.new(((1 - t) * self.x) + (t * v2.x), ((1 - t) * self.y) + (t * v2.y))
 end
 
+-- Rotates the current Vector2D object by a given angle.
+---@param degrees number
+---@return Vector2D
 function Vector2D:rotateByAngle(degrees)
     local radians = math.rad(degrees)
     local x = (self.x * math.cos(radians)) - (self.y * math.sin(radians))
@@ -137,15 +175,22 @@ function Vector2D:rotateByAngle(degrees)
     return Vector2D.new(x, y)
 end
 
+-- Reflects the current Vector2D object across a given normal.
+---@param normal Vector2D
+---@return Vector2D
 function Vector2D:reflectAcross(normal)
     local dotProduct = Vector2D.dotProduct(self, normal)
     return Vector2D.new(self.x - 2 * dotProduct * normal.x, self.y - 2 * dotProduct * normal.y)
 end
 
+-- Calculates the magnitude of the current Vector2D object.
+---@return number
 function Vector2D:magnitude()
     return math.sqrt((self.x ^ 2) + (self.y ^ 2))
 end
 
+-- Normalizes the current Vector2D object.
+---@return Vector2D
 function Vector2D:normalise()
     local magnitude = self:magnitude()
     return Vector2D.new(self.x / magnitude, self.y / magnitude)

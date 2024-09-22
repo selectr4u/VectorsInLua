@@ -27,7 +27,7 @@ local Vector2D = require("vectors.vector2d")
 
 local v1 = Vector2D.new(1, 2)
 local v2 = Vector2D.new(3, 4)
-local v3 = v1:add(v2)
+local v3 = v1 + v2
 print(v3)  -- Output: 4, 6
 ```
 
@@ -53,7 +53,7 @@ local Vector3D = require("vectors.vector3d")
 
 local v1 = Vector3D.new(1, 2, 3)
 local v2 = Vector3D.new(4, 5, 6)
-local v3 = v1:add(v2)
+local v3 = v1 + v2
 print(v3)  -- Output: 5, 7, 9
 ```
 
